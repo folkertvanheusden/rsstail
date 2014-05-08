@@ -1,0 +1,68 @@
+.TH "RSSTAIL" "1" "0.1" "" "User Commands"
+.SH "NAME"
+rsstail a Console Based RSS news reader 
+.SH "SYNOPSIS"
+.PP 
+\fBrsstail\fR [\fBOPTIONS\fB]... \fB\-u\fB URL 
+.SH "DESCRIPTION"
+.PP 
+This manual page was written for the \fBDebian\fP distribution 
+because the original program does not have a manual page. 
+.PP 
+
+Parse a RSS feed and read it, in an output similar to the tail command.
+.SH "OPTIONS"
+.PP 
+This is a Few Description on the main options for rsstail
+ 
+.IP "\fB\-t\fP" 10
+Show timestamp.
+.IP "\fB\-l\fP" 10
+Show link
+.IP "\fB\-d\fB" 10
+Show Description
+.IP "\fB\-p\fB" 10
+Show Publication date
+.IP "\fB\-a\fB" 10
+Show author
+.IP "\fB\-c\fB" 10
+Show comments
+.IP "\fB\-b X\fB" 10
+Where X is the limit in bytes for description/comments
+.IP "\fB\-z\fB" 10
+Continue even if there are XML parser errors in the RSS 
+feed.
+.IP "\fB\-n X\fB" 10
+Initially show X items
+.IP "\fB\-H\fB" 10
+Strip HTML tags
+.IP "\fB\-o X\fB" 10
+only show items newer than X[s/M/h/d/m/y]
+.IP "\fB\-u URL\fB" 10
+URL of RSS feed to tai
+.IP "\fB\-i Seconds\fB" 10
+check interval in seconds (default is 15 minutes)
+.IP "\fB\-r\fB"
+Print in reverse order
+.IP "\fB\-x Proxy\fB" 10
+proxy server to use (host[:port])
+.IP "\fB\-y ProxyAuth\fB" 10
+proxy authorization (user:password)
+.IP "\fB\-P\fB" 10
+do not exit when an error occurs
+.IP "\fB\-v\fB" 10
+be verbose (add more to be more verbose)
+.IP "\fB\-h\fP" 10 
+Help output
+.IP "\fB\-V\fP" 10 
+Show version of program. 
+.SH "AUTHOR"
+.PP 
+This manual page was written by Rene Mayorga <rmayorga@debian.org.sv> for 
+the \fBDebian\fP system (but may be used by others).  Permission is 
+granted to copy, distribute and/or modify this document under 
+the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation. 
+ 
+.PP 
+On Debian systems, the complete text of the GNU General Public 
+License can be found in /usr/share/common\-licenses/GPL. 
