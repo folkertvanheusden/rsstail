@@ -24,4 +24,4 @@ For everything more or less related to 'rsstail', please feel free
 to contact me on: folkert@vanheusden.com
 Consider using PGP. My PGP key-id is: 0x1f28d8ae
 
-Please support my opensource development: http://www.vanheusden.com/wishlist.php
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=flok&url=https://github.com/flok99/rsstail&title=rsstail&language=&tags=github&category=software)
