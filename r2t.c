@@ -5,6 +5,8 @@
 #include <time.h>
 #include <errno.h>
 #include <mrss.h>
+#include <langinfo.h>
+#include <locale.h>
 
 void replace(char *in, char *what, char by_what)
 {
@@ -153,6 +155,7 @@ int main(int argc, char *argv[])
 	char *heading = NULL;
 	mrss_options_t mot;
 	char *auth = NULL;
+	char *codeset = NULL;
 	char reverse = 0;
 
 	memset(&mot, 0x00, sizeof(mot));
@@ -327,6 +330,10 @@ int main(int argc, char *argv[])
 	memset(data_prev, 0x00, data_size);
 	memset(data_cur , 0x00, data_size);
 
+	setlocale(LC_ALL, "");
+	codeset = nl_langinfo(CODESET);
+
+
 	if (verbose)
 	{
 		int loop;
@@ -334,6 +341,7 @@ int main(int argc, char *argv[])
 		for(loop=0; loop<n_url; loop++)
 			printf("\t%s\n", url[loop]);
 		printf("Check interval: %d\n", check_interval);
+		printf("Output codeset: %s\n", codeset);
 	}
 
 	for(;;)
