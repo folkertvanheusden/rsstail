@@ -595,7 +595,10 @@ int main(int argc, char *argv[])
 		first_item[cur_url] = tmp_first_item;
 
 goto_next_url:
-        iconv_close (converter);
+        if (converter) {
+          iconv_close (converter);
+          converter = 0;
+        }
 		cur_url++;
 		if (cur_url == n_url)
 			cur_url = 0;
