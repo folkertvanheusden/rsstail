@@ -5,6 +5,9 @@
 #include <time.h>
 #include <errno.h>
 #include <mrss.h>
+#include <langinfo.h>
+#include <locale.h>
+#include <iconv.h>
 
 void replace(char *in, char *what, char by_what)
 {
@@ -100,6 +103,27 @@ void version(void)
 	printf("rsstail v" VERSION ", (C) 2005-2007 by folkert@vanheusden.com\n\n");
 }
 
+char* my_convert(iconv_t converter, const char *input)
+{
+  ize_t in_size = strlen(input);
+  size_t out_size = (in_size + 1) * 6; // seems to be enough
+  size_t converted;
+  char* output_start = malloc(out_size);
+  memset(output_start, 0x00, out_size);
+  if (!output_start) return NULL;
+  char* output = output_start;
+
+  do {
+	converted = iconv(converter, (char **) &input, &in_size, &output, &out_size);
+	if (converted == (size_t) -1) {
+	  free (output_start);
+	  return NULL;
+	}
+	if(in_size == 0) break;
+  } while(1);
+  return output_start;
+}
+
 void usage(void)
 {
 	version();
@@ -153,7 +177,9 @@ int main(int argc, char *argv[])
 	char *heading = NULL;
 	mrss_options_t mot;
 	char *auth = NULL;
+	char *current_encoding = NULL;
 	char reverse = 0;
+    iconv_t converter = 0;
 
 	memset(&mot, 0x00, sizeof(mot));
 
@@ -327,6 +353,9 @@ int main(int argc, char *argv[])
 	memset(data_prev, 0x00, data_size);
 	memset(data_cur , 0x00, data_size);
 
+	setlocale(LC_ALL, "");
+	current_encoding = nl_langinfo(CODESET);
+
 	if (verbose)
 	{
 		int loop;
@@ -334,6 +363,7 @@ int main(int argc, char *argv[])
 		for(loop=0; loop<n_url; loop++)
 			printf("\t%s\n", url[loop]);
 		printf("Check interval: %d\n", check_interval);
+		printf("Output current_encoding: %s\n", current_encoding);
 	}
 
 	for(;;)
@@ -403,6 +433,14 @@ int main(int argc, char *argv[])
 				return 2;
 		}
 
+        if (verbose)
+          printf("Creating converter %s -> %s\n", data_cur[cur_url] -> encoding, current_encoding);
+        converter = iconv_open(current_encoding, data_cur[cur_url] -> encoding);
+        if (converter == (iconv_t) -1) {
+          fprintf(stderr, "Error creating converter: %s \n", strerror(errno));
+          return 2;
+        }
+
 		item_cur = data_cur[cur_url] -> item;
 
 		if (reverse) {
@@ -465,11 +503,21 @@ int main(int argc, char *argv[])
 					printf(" %s", heading);
 				}
 
-				if (item_cur -> title != NULL)
-					printf("%s%s\n", no_heading?" ":"Title: ", item_cur -> title);
+				if (item_cur -> title != NULL) {
+                    char *title = my_convert(converter, item_cur -> title);
+                    if (title) {
+                      printf("%s%s\n", no_heading?" ":"Title: ", title);
+                      free(title);
+                    }
+                }
 
-				if (show_link && item_cur -> link != NULL)
-					printf("%s%s\n", no_heading?" ":"Link: ", item_cur -> link);
+				if (show_link && item_cur -> link != NULL) {
+                    char *link = my_convert(converter, item_cur -> link);
+                    if(link) {
+                      printf("%s%s\n", no_heading?" ":"Link: ", item_cur -> link);
+                      free(link);
+                    }
+                }
 
 				if (show_description && item_cur -> description != NULL)
 				{
@@ -480,7 +528,11 @@ int main(int argc, char *argv[])
 						if (bytes_limit != 0 && bytes_limit < strlen(stripped))
 							stripped[bytes_limit] = 0x00;
 
-						printf("%s%s\n", no_heading?" ":"Description: ", stripped);
+                        char *description = my_convert(converter, stripped);
+                        if (description) {
+                          printf("%s%s\n", no_heading?" ":"Description: ", description);
+                          free(description);
+                        }
 
 						free(stripped);
 					}
@@ -489,22 +541,35 @@ int main(int argc, char *argv[])
 						if (bytes_limit != 0 && bytes_limit < strlen(item_cur -> description))
 							(item_cur -> description)[bytes_limit] = 0x00;
 
-						printf("%s%s\n", no_heading?" ":"Description: ", item_cur -> description);
+                        char *description = my_convert(converter, item_cur -> description);
+                        if (description) {
+                          printf("%s%s\n", no_heading?" ":"Description: ", description);
+                          free(description);
+                        }
 					}
 				}
 
 				if (show_pubdate && item_cur -> pubDate != NULL)
 					printf("%s%s\n", no_heading?" ":"Pub.date: ", item_cur -> pubDate);
 
-				if (show_author && item_cur -> author != NULL)
-					printf("%s%s\n", no_heading?" ":"Author: ", item_cur -> author);
+				if (show_author && item_cur -> author != NULL){
+                    char *author = my_convert(converter, item_cur -> author);
+                    if (author) {
+                      printf("%s%s\n", no_heading?" ":"Author: ", author);
+                      free(author);
+                    }
+                }
 
 				if (show_comments && item_cur -> comments != NULL)
 				{
 					if (bytes_limit != 0 && bytes_limit < strlen(item_cur -> comments))
 						(item_cur -> comments)[bytes_limit] = 0x00;
 
-					printf("%s%s\n", no_heading?" ":"Comments: ", item_cur -> comments);
+                    char *comments = my_convert(converter, item_cur -> comments);
+                    if (comments) {
+                      printf("%s%s\n", no_heading?" ":"Comments: ", item_cur -> comments);
+                      free(comments);
+                    }
 				}
 			}
 
@@ -530,6 +595,7 @@ int main(int argc, char *argv[])
 		first_item[cur_url] = tmp_first_item;
 
 goto_next_url:
+        iconv_close (converter);
 		cur_url++;
 		if (cur_url == n_url)
 			cur_url = 0;
