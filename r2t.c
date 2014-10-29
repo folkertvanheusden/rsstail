@@ -105,7 +105,7 @@ void version(void)
 
 char* my_convert(iconv_t converter, const char *input)
 {
-  ize_t in_size = strlen(input);
+  size_t in_size = strlen(input);
   size_t out_size = (in_size + 1) * 6; // seems to be enough
   size_t converted;
   char* output_start = malloc(out_size);
