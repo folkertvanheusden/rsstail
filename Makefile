@@ -1,4 +1,4 @@
-VERSION=1.8
+VERSION=1.9
 
 DEBUG=-g
 LDFLAGS=-lmrss $(DEBUG)
@@ -10,8 +10,6 @@ all: rsstail
 
 rsstail: $(OBJS)
 	$(CC) -Wall -W $(OBJS) $(LDFLAGS) -o rsstail
-	#
-	# Oh, blatant plug: http://keetweej.vanheusden.com/wishlist.html
 
 install: rsstail
 	cp rsstail $(DESTDIR)/usr/bin
@@ -27,3 +25,6 @@ package: clean
 	cp *.c *.1 Makefile* readme.txt license.* rsstail-$(VERSION)
 	tar cf - rsstail-$(VERSION) | gzip -9 > rsstail-$(VERSION).tgz
 	rm -rf rsstail-$(VERSION)
+
+check:
+	cppcheck -v --enable=all --std=c++11 --inconclusive -I. . 2> err.txt
