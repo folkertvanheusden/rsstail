@@ -465,6 +465,9 @@ int main(int argc, char *argv[])
 				rev_item_last = rev_item_cur;
 				rev_item_cur = item_cur;
 
+				if (!item_cur)
+					break;
+
 				if (!item_cur -> next)
 				{
 					rev_item_cur -> next = rev_item_last;
