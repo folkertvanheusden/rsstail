@@ -1,7 +1,7 @@
 VERSION=1.9.1
 
 DEBUG=-g
-LDFLAGS=-lmrss $(DEBUG)
+LDFLAGS=-liconv -lmrss $(DEBUG)
 CFLAGS=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
 
 OBJS=r2t.o
