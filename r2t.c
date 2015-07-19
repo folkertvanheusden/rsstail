@@ -439,6 +439,10 @@ int main(int argc, char *argv[])
 			return 2;
 		}
 
+		if (data_cur[cur_url]->encoding == NULL) {
+			data_cur[cur_url]->encoding = "utf-8";
+		}
+
 		if (verbose)
 			printf("Creating converter %s -> %s\n", data_cur[cur_url] -> encoding, current_encoding);
 
