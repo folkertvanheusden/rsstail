@@ -1,4 +1,4 @@
-VERSION=1.9.1
+VERSION=2.0
 
 DEBUG=-g
 LDFLAGS=-liconv -lmrss $(DEBUG)
@@ -22,7 +22,7 @@ package: clean
 	# source package
 	rm -rf rsstail-$(VERSION)*
 	mkdir rsstail-$(VERSION)
-	cp *.c *.1 Makefile* readme.txt license.* rsstail-$(VERSION)
+	cp *.c *.1 Makefile* README.md license.* rsstail-$(VERSION)
 	tar cf - rsstail-$(VERSION) | gzip -9 > rsstail-$(VERSION).tgz
 	rm -rf rsstail-$(VERSION)
 
