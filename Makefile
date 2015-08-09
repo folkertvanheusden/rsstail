@@ -1,4 +1,4 @@
-VERSION=1.9.1
+VERSION=2.0
 
 DEBUG=-g
 LDFLAGS=-liconv -lmrss $(DEBUG)
