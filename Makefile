@@ -6,14 +6,20 @@ CFLAGS=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
 
 OBJS=r2t.o
 
+prefix ?= /usr/local
+bindir ?= $(prefix)/bin
+mandir ?= $(prefix)/share/man/man1
+
 all: rsstail
 
 rsstail: $(OBJS)
 	$(CC) -Wall -W $(OBJS) $(LDFLAGS) -o rsstail
 
 install: rsstail
-	cp rsstail $(DESTDIR)/usr/bin
-	cp rsstail.1 $(DESTDIR)/usr/share/man/man1/
+	mkdir -p $(bindir)
+	mkdir -p $(mandir)
+	install rsstail $(bindir)
+	install -m 644 rsstail.1 $(mandir)
 
 clean:
 	rm -f $(OBJS) core rsstail
