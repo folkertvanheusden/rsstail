@@ -20,6 +20,9 @@ install: rsstail
 	mkdir -p $(mandir)
 	install rsstail $(bindir)
 	install -m 644 rsstail.1 $(mandir)
+	
+uninstall:
+	rm $(bindir)/rsstail $(mandir)/rsstail.1
 
 clean:
 	rm -f $(OBJS) core rsstail
