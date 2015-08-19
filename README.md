@@ -1,28 +1,50 @@
 rsstail
 =======
 
-tail for rss feeds
-You need 'libmrss':
-	http://www2.autistici.org/bakunin/codes.php
-at least version 0.7!
+rsstail is tail for RSS feeds
 
-Compile & install:
-make install
+## Usage
 
-Usage:
-rsstail -u url -i check_interval
-e.g.:
-rsstail -u http://www.filmhuisgouda.nl/rss/rss.php -i 300
-this will check every 5 minutes if anything new was published.
+Basic usage: `rsstail -u URL -i CHECK_INTERVAL`.
 
-Help:
-rsstail -h
-will show a list of what rsstail can do for you.
+For example a command below will check every 5 minutes if anything new was published:
 
+```sh
+$ rsstail -u http://www.filmhuisgouda.nl/rss/rss.php -i 300
+Title: Que horas ela volta?
+Title: Que horas ela volta?
+Title: 45 years
+Title: Madame Bovary
+...
+```
 
-For everything more or less related to 'rsstail', please feel free
-to contact me on: folkert@vanheusden.com
-Consider using PGP. My PGP key-id is: 0x1f28d8ae
+`rsstail -h` will show a list of what rsstail can do for you.
+
+## Installation
+
+On Debian/Ubuntu: `apt-get install rsstail`.
+
+## Building
+
+### Dependencies
+
+rsstail depends on [`libmrss`](http://www.autistici.org/bakunin/codes.php#libmrss) (version >= 0.7). On Debian/Ubuntu you can install `libmrss` by running `apt-get install libmrss0`. To compile source code you may need to run `apt-get install libmrss0-dev`.
+
+### Compile source code
+
+```
+$ git clone https://github.com/flok99/rsstail.git
+$ cd rsstail
+# make install
+```
+
+## Contact
+
+For everything more or less related to rsstail, please feel free to contact me on `folkert@vanheusden.com`.
+
+Consider using PGP. My PGP key-id is: `0x1f28d8ae`.
+
+## Donations
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=flok&url=https://github.com/flok99/rsstail&title=rsstail&language=&tags=github&category=software)
 
