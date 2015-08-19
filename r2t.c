@@ -9,9 +9,9 @@
 #include <locale.h>
 #include <iconv.h>
 
-const char name[] = "rsstail " VERSION ", (C) 2006-2014 by folkert@vanheusden.com";
+const char name[] = "rsstail " VERSION ", (C) 2006-2015 by folkert@vanheusden.com";
 
-void replace(char *in, char *what, char by_what)
+void replace(char *const in, const char *const what, char by_what)
 {
 	int what_len = strlen(what);
 
@@ -27,7 +27,7 @@ void replace(char *in, char *what, char by_what)
 	}
 }
 
-char *remove_html_tags(char *in)
+char *remove_html_tags(const char *const in)
 {
 	char *copy = strdup(in);
 
@@ -110,7 +110,7 @@ char* my_convert(iconv_t converter, const char *input)
 	size_t in_size = strlen(input);
 	size_t out_size = (in_size + 1) * 6; // seems to be enough
 
-	char *output_start = calloc(1, out_size), *output = output_start;
+	char *output_start = (char *)calloc(1, out_size), *output = output_start;
 	if (!output_start)
 		return NULL;
 
@@ -346,8 +346,8 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	data_prev = (mrss_t **)calloc(n_url, sizeof(mrss_t));
-	data_cur  = (mrss_t **)calloc(n_url, sizeof(mrss_t));
+	data_prev = (mrss_t **)calloc(n_url, sizeof(mrss_t *));
+	data_cur  = (mrss_t **)calloc(n_url, sizeof(mrss_t *));
 	if (!data_prev || !data_cur)
 	{
 		fprintf(stderr, "Cannot allocate memory\n");
@@ -408,10 +408,9 @@ int main(int argc, char *argv[])
 
 			goto goto_next_url;
 		}
-		else if (verbose > 2)
-		{
+
+		if (verbose > 2)
 			printf("Feed change detected, %s", ctime(&cur_last_changed));
-		}
 
 		last_changed = cur_last_changed;
 
@@ -439,9 +438,8 @@ int main(int argc, char *argv[])
 			return 2;
 		}
 
-		if (data_cur[cur_url]->encoding == NULL) {
-			data_cur[cur_url]->encoding = "utf-8";
-		}
+		if (data_cur[cur_url]->encoding == NULL)
+			data_cur[cur_url]->encoding = strdup("utf-8");
 
 		if (verbose)
 			printf("Creating converter %s -> %s\n", data_cur[cur_url] -> encoding, current_encoding);
@@ -606,7 +604,7 @@ int main(int argc, char *argv[])
 
 			if (err_free != MRSS_OK)
 			{
-				fprintf(stderr, "Error freeing up memory: %s\n", mrss_strerror(err_read));
+				fprintf(stderr, "Error freeing up memory: %s\n", mrss_strerror(err_free));
 
 				if (no_error_exit)
 					goto goto_next_url;
