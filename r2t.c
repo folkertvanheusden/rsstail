@@ -139,6 +139,7 @@ void usage(void)
 	printf("-p      show publication date\n");
 	printf("-a      show author\n");
 	printf("-c      show comments\n");
+	printf("-g	show guid\n");
 	printf("-N      do not show headings\n");
 	printf("-b x	limit description/comments to x bytes\n");
 	printf("-z      continue even if there are XML parser errors in the RSS feed\n");
@@ -169,7 +170,7 @@ int main(int argc, char *argv[])
 	char *proxy = NULL, *proxy_auth = NULL;
 	int sw = 0;
 	int verbose = 0;
-	char show_timestamp = 0, show_link = 0, show_description = 0, show_pubdate = 0, show_author = 0, show_comments = 0;
+	char show_timestamp = 0, show_link = 0, show_description = 0, show_pubdate = 0, show_author = 0, show_comments = 0, show_guid = 0;
 	char strip_html = 0, no_error_exit = 0;
 	char one_shot = 0;
 	char no_heading = 0;
@@ -186,7 +187,7 @@ int main(int argc, char *argv[])
 
 	memset(&mot, 0x00, sizeof(mot));
 
-	while((sw = getopt(argc, argv, "A:Z:1b:PHztldrpacu:Ni:n:x:y:vVh")) != -1)
+	while((sw = getopt(argc, argv, "A:Z:1b:PHztldrpacgu:Ni:n:x:y:vVh")) != -1)
 	{
 		switch(sw)
 		{
@@ -293,6 +294,10 @@ int main(int argc, char *argv[])
 
 			case 'c':
 				show_comments = 1;
+				break;
+
+			case 'g':
+				show_guid = 1;
 				break;
 
 			case 'u':
@@ -593,6 +598,9 @@ int main(int argc, char *argv[])
 						free(comments);
 					}
 				}
+
+				if (show_guid && item_cur -> guid != NULL)
+					printf("%s%s\n", no_heading?" ":"guid: ", item_cur -> guid);
 			}
 
 			item_cur = item_cur -> next;
