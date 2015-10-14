@@ -1,8 +1,8 @@
-VERSION=2.0
+VERSION=2.1
 
 DEBUG=-g
-LDFLAGS=-liconv -lmrss $(DEBUG)
-CFLAGS=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
+LDFLAGS=-liconv_hook -lmrss $(DEBUG)
+CFLAGS=-O3 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
 
 OBJS=r2t.o
 
