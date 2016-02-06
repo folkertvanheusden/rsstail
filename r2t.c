@@ -135,6 +135,7 @@ void usage(void)
 
 	printf("-t	show timestamp\n");
 	printf("-l	show link\n");
+	printf("-e	show enclosure URL\n");
 	printf("-d	show description\n");
 	printf("-p	show publication date\n");
 	printf("-a	show author\n");
@@ -170,7 +171,7 @@ int main(int argc, char *argv[])
 	char *proxy = NULL, *proxy_auth = NULL;
 	int sw = 0;
 	int verbose = 0;
-	char show_timestamp = 0, show_link = 0, show_description = 0, show_pubdate = 0, show_author = 0, show_comments = 0, show_guid = 0;
+	char show_timestamp = 0, show_link = 0, show_enclosure_url = 0, show_description = 0, show_pubdate = 0, show_author = 0, show_comments = 0, show_guid = 0;
 	char strip_html = 0, no_error_exit = 0;
 	char one_shot = 0;
 	char no_heading = 0;
@@ -187,7 +188,7 @@ int main(int argc, char *argv[])
 
 	memset(&mot, 0x00, sizeof(mot));
 
-	while((sw = getopt(argc, argv, "A:Z:1b:PHztldrpacgu:Ni:n:x:y:vVh")) != -1)
+	while((sw = getopt(argc, argv, "A:Z:1b:PHztledrpacgu:Ni:n:x:y:vVh")) != -1)
 	{
 		switch(sw)
 		{
@@ -274,6 +275,10 @@ int main(int argc, char *argv[])
 
 			case 'l':
 				show_link = 1;
+				break;
+
+			case 'e':
+				show_enclosure_url = 1;
 				break;
 
 			case 'd':
@@ -500,7 +505,7 @@ int main(int argc, char *argv[])
 
 				n_shown++;
 
-				if (show_link + show_description + show_pubdate + show_author + show_comments > 1)
+				if (show_link + show_enclosure_url + show_description + show_pubdate + show_author + show_comments > 1)
 					printf("\n");
 
 				if (show_timestamp)
@@ -539,6 +544,17 @@ int main(int argc, char *argv[])
 					{
 						printf("%s%s\n", no_heading?" ":"Link: ", item_cur -> link);
 						free(link);
+					}
+				}
+
+				if (show_enclosure_url && item_cur -> enclosure_url != NULL)
+				{
+					char *enclosure_url = my_convert (converter, item_cur -> enclosure_url);
+
+					if (enclosure_url)
+					{
+						printf("%s%s\n", no_heading?" ":"Enclosure URL: ", enclosure_url);
+						free(enclosure_url);
 					}
 				}
 
