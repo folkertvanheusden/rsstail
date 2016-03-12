@@ -31,17 +31,21 @@ Show author
 Show comments
 .IP "\fB\-g\fB" 10
 Show guid
+.IP "\fB\-N\fB" 10
+Do not show headings
 .IP "\fB\-b X\fB" 10
 Where X is the limit in bytes for description/comments
 .IP "\fB\-z\fB" 10
 Continue even if there are XML parser errors in the RSS 
 feed.
+.IP "\fB\-Z string\fB" 10
+Output user-specified string before all the other headings
 .IP "\fB\-n X\fB" 10
 Initially show X items
 .IP "\fB\-H\fB" 10
 Strip HTML tags
-.IP "\fB\-o X\fB" 10
-only show items newer than X[s/M/h/d/m/y]
+.IP "\fB\-A username:password\fB" 10
+Authenticate against webserver
 .IP "\fB\-u URL\fB" 10
 URL of RSS feed to tai
 .IP "\fB\-i Seconds\fB" 10
@@ -54,6 +58,8 @@ proxy server to use (host[:port])
 proxy authorization (user:password)
 .IP "\fB\-P\fB" 10
 do not exit when an error occurs
+.IP "\fB\-1\fB" 10
+One shot mode: check the feeds for updates, print it out and quit
 .IP "\fB\-v\fB" 10
 be verbose (add more to be more verbose)
 .IP "\fB\-h\fP" 10 
