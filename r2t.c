@@ -133,30 +133,30 @@ void usage(void)
 {
 	version();
 
-	printf("-t	show timestamp\n");
-	printf("-l	show link\n");
-	printf("-e	show enclosure URL\n");
-	printf("-d	show description\n");
-	printf("-p	show publication date\n");
-	printf("-a	show author\n");
-	printf("-c	show comments\n");
-	printf("-g	show guid\n");
+	printf("-t	show a timestamp of when the item was processed\n");
+	printf("-l	show item's link\n");
+	printf("-e	show item's enclosure URL\n");
+	printf("-d	show item's description\n");
+	printf("-p	show item's publication date\n");
+	printf("-a	show item's author\n");
+	printf("-c	show item's comments\n");
+	printf("-g	show item's GUID\n");
 	printf("-N	do not show headings\n");
 	printf("-b x	limit description/comments to x bytes\n");
 	printf("-z	continue even if there are XML parser errors in the RSS feed\n");
-	printf("-Z x	add heading 'x'\n");
-	printf("-n x	initially show x items\n");
+	printf("-Z x	print string 'x' before headings\n");
+	printf("-n x	initially show only first 'x' items\n");
 	printf("-r	reverse output, so it looks more like an RSS feed\n");
 	printf("-H	strip HTML tags\n");
 	/*	printf("-o x    only show items newer then x[s/M/h/d/m/y]\n");	*/
-	printf("-A x	authenticate against webserver, x is in format username:password\n");
+	printf("-A x	authenticate against webserver (username:password)\n");
 	printf("-u url	URL of RSS feed to tail\n");
 	printf("-i x	check interval in seconds (default is 15min)\n");
 	printf("-x x	proxy server to use (host[:port])\n");
-	printf("-y x	proxy authorization (user:password)\n");
+	printf("-y x	proxy authentication (username:password)\n");
 	printf("-P	do not exit when an error occurs\n");
-	printf("-1	one shot\n");
-	printf("-v	be verbose (add more to be more verbose)\n");
+	printf("-1	one shot mode: print new items and exit\n");
+	printf("-v	be verbose (repeat to increase verbosity)\n");
 	printf("-V	show version and exit\n");
 	printf("-h	this help\n");
 }
