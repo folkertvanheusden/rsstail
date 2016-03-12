@@ -9,7 +9,7 @@
 #include <locale.h>
 #include <iconv.h>
 
-const char name[] = "rsstail " VERSION ", (C) 2006-2015 by folkert@vanheusden.com";
+const char name[] = "rsstail " VERSION ", (C) 2006-2016 by folkert@vanheusden.com";
 
 void replace(char *const in, const char *const what, char by_what)
 {
