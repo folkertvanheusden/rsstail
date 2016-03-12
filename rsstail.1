@@ -1,6 +1,6 @@
 .TH "RSSTAIL" "1" "0.1" "" "User Commands"
 .SH "NAME"
-rsstail a Console Based RSS news reader 
+rsstail \- a console RSS reader that monitors feeds and outputs new entries
 .SH "SYNOPSIS"
 .PP 
 \fBrsstail\fR [\fBOPTIONS\fB]... \fB\-u\fB URL 
@@ -10,62 +10,71 @@ This manual page was written for the \fBDebian\fP distribution
 because the original program does not have a manual page. 
 .PP 
 
-Parse a RSS feed and read it, in an output similar to the tail command.
+rsstail fetches RSS feeds from specified URLs and outputs them continuously, 
+much like \fBtail -f\fB does with files.
 .SH "OPTIONS"
 .PP 
-This is a Few Description on the main options for rsstail
+Options can be given in any order. Options that don't have an argument can be 
+combined after a single dash.
  
 .IP "\fB\-t\fP" 10
-Show timestamp.
+Show a timestamp of when the item was processed
 .IP "\fB\-l\fP" 10
-Show link
+Show item's link
 .IP "\fB\-e\fP" 10
-Show enclosure URL
+Show item's enclosure URL
 .IP "\fB\-d\fB" 10
-Show Description
+Show item's description
 .IP "\fB\-p\fB" 10
-Show Publication date
+Show item's publication date
 .IP "\fB\-a\fB" 10
-Show author
+Show item's author
 .IP "\fB\-c\fB" 10
-Show comments
+Show item's comments
 .IP "\fB\-g\fB" 10
-Show guid
+Show item's GUID
+.IP "\fB\-N\fB" 10
+Do not show headings
 .IP "\fB\-b X\fB" 10
-Where X is the limit in bytes for description/comments
+Limit description and comments to \fBX\fB bytes
 .IP "\fB\-z\fB" 10
 Continue even if there are XML parser errors in the RSS 
-feed.
+feed
+.IP "\fB\-Z string\fB" 10
+Output user-specified string before all the other headings
 .IP "\fB\-n X\fB" 10
-Initially show X items
+Initially show only first \fBX\fB items
 .IP "\fB\-H\fB" 10
 Strip HTML tags
-.IP "\fB\-o X\fB" 10
-only show items newer than X[s/M/h/d/m/y]
+.IP "\fB\-A username:password\fB" 10
+Authenticate against webserver
 .IP "\fB\-u URL\fB" 10
-URL of RSS feed to tai
-.IP "\fB\-i Seconds\fB" 10
-check interval in seconds (default is 15 minutes)
+URL of RSS feed to tail
+.IP "\fB\-i seconds\fB" 10
+Check interval in seconds (default is 15 minutes)
 .IP "\fB\-r\fB"
-Print in reverse order
-.IP "\fB\-x Proxy\fB" 10
-proxy server to use (host[:port])
-.IP "\fB\-y ProxyAuth\fB" 10
-proxy authorization (user:password)
+Print items in reverse order
+.IP "\fB\-x host[:port]\fB" 10
+Proxy server to use
+.IP "\fB\-y username:password\fB" 10
+Credentials for the proxy server
 .IP "\fB\-P\fB" 10
-do not exit when an error occurs
+Do not exit when an error occurs
+.IP "\fB\-1\fB" 10
+One shot mode: check the feeds for new items, print them out and exit
 .IP "\fB\-v\fB" 10
-be verbose (add more to be more verbose)
+Be verbose (repeat to increase verbosity)
 .IP "\fB\-h\fP" 10 
-Help output
+Show options and their descriptions
 .IP "\fB\-V\fP" 10 
-Show version of program. 
+Show version of the program
 .SH "AUTHOR"
 .PP 
 This manual page was written by Rene Mayorga <rmayorga@debian.org.sv> for 
 the \fBDebian\fP system (but may be used by others).  Permission is 
 granted to copy, distribute and/or modify this document under 
-the terms of the GNU General Public License, Version 2 any later version published by the Free Software Foundation. 
+the terms of the GNU General Public License, Version 2 or any later version 
+published by the Free Software Foundation. 
  
 .PP 
 On Debian systems, the complete text of the GNU General Public 
