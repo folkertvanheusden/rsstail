@@ -36,11 +36,7 @@ sudo apt-get install rsstail
 ### Dependencies
 
 rsstail depends on [`libmrss`](http://www.autistici.org/bakunin/codes.php#libmrss) (version >= 0.7).
-On Debian/Ubuntu you can install libmrss by running
-
-```
-sudo apt-get install libmrss0
-```
+On Debian/Ubuntu libmrss will be installed automatically if you install rsstail or libmrss0-dev (as shown below) as package.
 
 To compile source code you may need to run
 
