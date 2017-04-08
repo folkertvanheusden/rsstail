@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
 	char strip_html = 0, no_error_exit = 0;
 	char one_shot = 0;
 	char no_heading = 0;
-	int bytes_limit = 0;
+	unsigned int bytes_limit = 0;
 	time_t last_changed = (time_t)0;
 	char continue_on_error = 0;
 	int show_n = -1;
