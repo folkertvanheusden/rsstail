@@ -1,19 +1,10 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include <errno.h>
-#include <mrss.h>
-#include <langinfo.h>
-#include <locale.h>
-#include <iconv.h>
+#include "r2t.h"
 
 const char name[] = "rsstail " VERSION ", (C) 2006-2016 by folkert@vanheusden.com";
 
 void replace(char *const in, const char *const what, char by_what)
 {
-	int what_len = strlen(what);
+	size_t what_len = strlen(what);
 
 	/* replace &lt; etc. */
 	for(;;)
@@ -164,7 +155,8 @@ void usage(void)
 int main(int argc, char *argv[])
 {
 	char **url = NULL;
-	int n_url = 0, cur_url = 0;
+	size_t n_url = 0;
+	size_t cur_url = 0;
 	int check_interval = 15 * 60;
 	mrss_t **data_prev = NULL;
 	mrss_t **data_cur = NULL;
@@ -175,7 +167,7 @@ int main(int argc, char *argv[])
 	char strip_html = 0, no_error_exit = 0;
 	char one_shot = 0;
 	char no_heading = 0;
-	unsigned int bytes_limit = 0;
+	size_t bytes_limit = 0;
 	time_t last_changed = (time_t)0;
 	char continue_on_error = 0;
 	int show_n = -1;
@@ -209,7 +201,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case 'b':
-				bytes_limit = atoi(optarg);
+				bytes_limit = (size_t) atoi(optarg);
 				if (bytes_limit <= 0)
 				{
 					printf("-b requires a number > 0\n");
@@ -369,11 +361,9 @@ int main(int argc, char *argv[])
 
 	if (verbose)
 	{
-		int loop;
-
 		printf("Monitoring RSS feeds:\n");
 
-		for(loop=0; loop<n_url; loop++)
+		for(size_t loop=0; loop<n_url; loop++)
 			printf("\t%s\n", url[loop]);
 
 		printf("Check interval: %d\n", check_interval);
@@ -660,7 +650,7 @@ goto_next_url:
 		if (verbose > 2)
 			printf("Sleeping...\n");
 
-		sleep(check_interval / n_url);
+		sleep((unsigned int)check_interval / (unsigned int) n_url);
 	}
 
 	return 0;
