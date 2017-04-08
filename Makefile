@@ -2,7 +2,7 @@ VERSION=2.1
 
 DEBUG=-g
 LDFLAGS=-liconv_hook -lmrss $(DEBUG)
-CFLAGS=-O3 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
+CFLAGS=-O3 -Wall --std=gnu11 -DVERSION=\"$(VERSION)\" $(DEBUG)
 
 OBJS=r2t.o
 
@@ -20,7 +20,7 @@ install: rsstail
 	mkdir -p $(mandir)
 	install rsstail $(bindir)
 	install -m 644 rsstail.1 $(mandir)
-	
+
 uninstall:
 	rm $(bindir)/rsstail $(mandir)/rsstail.1
 
@@ -36,4 +36,4 @@ package: clean
 	rm -rf rsstail-$(VERSION)
 
 check:
-	cppcheck -v --enable=all --std=c++11 --inconclusive -I. . 2> err.txt
+	cppcheck -v --enable=all --std=c++11 --inconclusive --check-config -I. . 2> err.txt
