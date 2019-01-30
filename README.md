@@ -55,10 +55,3 @@ $ sudo make install
 ## Contact
 
 For everything more or less related to rsstail, please feel free to contact me on mail@vanheusden.com.
-
-
-## Donations
-
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=flok&url=https://github.com/flok99/rsstail&title=rsstail&language=&tags=github&category=software)
-
-[![Support the development of this project](https://pledgie.com/campaigns/28612.png?skin_name=chrome)](https://pledgie.com/campaigns/28612)
