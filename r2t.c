@@ -1,6 +1,6 @@
 #include "r2t.h"
 
-const char name[] = "rsstail " VERSION ", (C) 2006-2016 by folkert@vanheusden.com";
+const char name[] = "rsstail " VERSION ", (C) 2006-2023 by folkert@vanheusden.com";
 
 void replace(char *const in, const char *const what, char by_what)
 {
