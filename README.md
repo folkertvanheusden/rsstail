@@ -47,11 +47,11 @@ sudo apt-get install libmrss0-dev libiconv-hook-dev
 ### Compile source code
 
 ```
-$ git clone https://github.com/flok99/rsstail.git
+$ git clone https://github.com/folkertvanheusden/rsstail.git
 $ cd rsstail
 $ sudo make install
 ```
 
 ## Contact
 
-For everything more or less related to rsstail, please feel free to contact me on mail@vanheusden.com.
+For things related to rsstail, feel free to contact me on mail@vanheusden.com.
