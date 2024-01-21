@@ -133,6 +133,7 @@ void usage(void)
 	printf("-c	show item's comments\n");
 	printf("-g	show item's GUID\n");
 	printf("-N	do not show headings\n");
+	printf("-T	do not show title\n");
 	printf("-b x	limit description/comments to x bytes\n");
 	printf("-z	continue even if there are XML parser errors in the RSS feed\n");
 	printf("-Z x	print string 'x' before headings\n");
