@@ -1,6 +1,6 @@
 VERSION=2.1
 
-DEBUG=-g
+DEBUG=-ggdb3
 LDFLAGS=-liconv_hook -lmrss $(DEBUG)
 CFLAGS=-O3 -Wall --std=gnu11 -DVERSION=\"$(VERSION)\" $(DEBUG)
 
@@ -31,7 +31,7 @@ package: clean
 	# source package
 	rm -rf rsstail-$(VERSION)*
 	mkdir rsstail-$(VERSION)
-	cp *.c *.1 Makefile* README.md license.* rsstail-$(VERSION)
+	cp *.c rsstail.1 Makefile* README.md license.* rsstail-$(VERSION)
 	tar cf - rsstail-$(VERSION) | gzip -9 > rsstail-$(VERSION).tgz
 	rm -rf rsstail-$(VERSION)
 

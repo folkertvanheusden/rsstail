@@ -381,7 +381,7 @@ int main(int argc, char *argv[])
 		mrss_item_t *item_cur = NULL;
 		mrss_item_t *first_item[n_url];
 		mrss_item_t *tmp_first_item;
-		time_t cur_last_changed;
+		time_t cur_last_changed = 0;
 		int n_shown = 0;
 
 		if (verbose)
