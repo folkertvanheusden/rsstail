@@ -1,7 +1,7 @@
 VERSION=2.1
 
 DEBUG=-ggdb3
-LDFLAGS=-liconv_hook -lmrss $(DEBUG)
+LDFLAGS=-lmrss $(DEBUG)
 CFLAGS=-O3 -Wall --std=gnu11 -DVERSION=\"$(VERSION)\" $(DEBUG)
 
 OBJS=r2t.o

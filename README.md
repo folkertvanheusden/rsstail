@@ -41,7 +41,7 @@ On Debian/Ubuntu libmrss will be installed automatically if you install rsstail 
 To compile source code you may need to run
 
 ```
-sudo apt-get install libmrss0-dev libiconv-hook-dev
+sudo apt-get install libmrss0-dev
 ```
 
 ### Compile source code
