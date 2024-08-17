@@ -333,12 +333,12 @@ int main(int argc, char *argv[])
 
 			case 'V':
 				version();
-				return 1;
+				return 0;
 
 			case 'h':
 			default:
 				usage();
-				return 1;
+				return 0;
 		}
 	}
 
