@@ -644,10 +644,6 @@ goto_next_url:
 			converter = 0;
 		}
 
-		cur_url++;
-		if (cur_url >= n_url)
-			cur_url = 0;
-
 		fflush(stdout);
 
 		if (one_shot)
@@ -656,7 +652,11 @@ goto_next_url:
 		if (verbose > 2)
 			printf("Sleeping...\n");
 
-		sleep((unsigned int)check_interval / (unsigned int) n_url);
+		cur_url++;
+		if (cur_url >= n_url) {
+			cur_url = 0;
+			sleep((unsigned int)check_interval);
+		}
 	}
 
 	return 0;
