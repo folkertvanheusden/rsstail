@@ -1,6 +1,6 @@
 #include "r2t.h"
 
-const char name[] = "rsstail " VERSION ", (C) 2006-2024 by folkert@vanheusden.com";
+const char name[] = "rsstail " VERSION ", (C) 2006-2026 by folkert@vanheusden.com";
 
 void replace(char *const in, const char *const what, char by_what)
 {
@@ -143,6 +143,7 @@ void usage(void)
 	/*	printf("-o x    only show items newer then x[s/M/h/d/m/y]\n");	*/
 	printf("-A x	authenticate against webserver (username:password)\n");
 	printf("-u url	URL of RSS feed to tail\n");
+	printf("-U x    user-agent to fake\n");
 	printf("-i x	check interval in seconds (default is 15min)\n");
 	printf("-x x	proxy server to use (host[:port])\n");
 	printf("-y x	proxy authentication (username:password)\n");
@@ -178,14 +179,19 @@ int main(int argc, char *argv[])
 	char *auth = NULL;
 	char *current_encoding = NULL;
 	char reverse = 0;
+	const char *user_agent = NULL;
 	iconv_t converter = 0;
 
 	memset(&mot, 0x00, sizeof(mot));
 
-	while((sw = getopt(argc, argv, "A:Z:1b:PHztTledrpacgu:Ni:n:x:y:vVh")) != -1)
+	while((sw = getopt(argc, argv, "U:A:Z:1b:PHztTledrpacgu:Ni:n:x:y:vVh")) != -1)
 	{
 		switch(sw)
 		{
+			case 'U':
+				user_agent = optarg;
+				break;
+
 			case 'A':
 				auth = optarg;
 				break;
@@ -345,7 +351,7 @@ int main(int argc, char *argv[])
 	mot.timeout = check_interval;
 	mot.proxy = proxy;
 	mot.proxy_authentication = proxy_auth;
-	mot.user_agent = (char *)name;
+	mot.user_agent = user_agent ? (char *)user_agent : (char *)name;
 	mot.authentication = auth;
 
 	if (n_url == 0)

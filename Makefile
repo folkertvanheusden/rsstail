@@ -1,4 +1,4 @@
-VERSION=2.2
+VERSION=2.9
 
 DEBUG=-ggdb3
 LDFLAGS=-lmrss $(DEBUG)

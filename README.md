@@ -54,4 +54,4 @@ $ sudo make install
 
 ## Contact
 
-For things related to rsstail, feel free to contact me on mail@vanheusden.com.
+For things related to rsstail, feel free to contact me on folkert@vanheusden.com.
