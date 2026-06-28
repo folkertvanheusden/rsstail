@@ -530,10 +530,16 @@ int main(int argc, char *argv[])
 				if (show_title && item_cur -> title != NULL)
 				{
 					char *title = my_convert(converter, item_cur -> title);
-
 					if (title)
 					{
-						printf("%s%s\n", no_heading?" ":"Title: ", title);
+						if (strip_html) {
+							char *stripped = remove_html_tags(title);
+							printf("%s%s\n", no_heading?" ":"Title: ", stripped);
+							free(stripped);
+						}
+						else {
+							printf("%s%s\n", no_heading?" ":"Title: ", title);
+						}
 						free(title);
 					}
 				}
