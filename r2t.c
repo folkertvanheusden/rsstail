@@ -120,6 +120,12 @@ char* my_convert(iconv_t converter, const char *input)
 	return output_start;
 }
 
+void test_url(const char *const url)
+{
+	if (strncasecmp(url, "http", 4) != 0)
+		fprintf(stderr, "Are you sure the URL is correct? It does not start with \"http\".\n");
+}
+
 void usage(void)
 {
 	version();
@@ -406,6 +412,7 @@ int main(int argc, char *argv[])
 			}
 
 			fprintf(stderr, "Error reading RSS feed: %s\n", mrss_strerror(err_read));
+			test_url(url[cur_url]);
 
 			if (no_error_exit)
 				goto goto_next_url;
@@ -439,10 +446,12 @@ int main(int argc, char *argv[])
 			else if (err_read == MRSS_ERR_PARSER && continue_on_error)
 			{
 				fprintf(stderr, "Error reading RSS feed: %s\n", mrss_strerror(err_read));
+				test_url(url[cur_url]);
 				goto goto_next_url;
 			}
 
 			fprintf(stderr, "Error reading RSS feed: %s\n", mrss_strerror(err_read));
+			test_url(url[cur_url]);
 
 			if (no_error_exit)
 				goto goto_next_url;
